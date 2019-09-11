@@ -1,0 +1,16 @@
+module Memorable
+
+extend Memorable::Artist
+extend Memorable::Song
+
+def reset_all
+  all.clear
+  end
+
+  def count
+   all.count
+  end
+
+
+
+end

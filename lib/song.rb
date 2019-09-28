@@ -1,14 +1,26 @@
 require 'pry'
-
+ require_relative '../lib/concerns/memorable'
+ require_relative '../lib/concerns/paramable'
 class Song
+  
+  extend Memorable::ClassInstances 
+  include  Memorable::InstanceMethods
+  include Paramable 
+  
+  
   attr_accessor :name
   attr_reader :artist
 
   @@songs = []
-
-  def initialize
-    @@songs << self
-  end
+ 
+ def initialize
+    self.class.all << self
+end
+ 
+#refactored above 
+  # def initialize
+  #   @@songs << self
+  # end
 
   def self.find_by_name(name)
     @@songs.detect{|a| a.name == name}
@@ -17,20 +29,22 @@ class Song
   def self.all
     @@songs
   end
+  
+ #the commented out stuff can be deleted because its repeated in both classes so we put it in the Memorable.rb folder to not repeat ourselves. but be "Extend" to both class by the   extend Memorable::ClassInstances 
+ 
+  # def self.reset_all
+  #   self.all.clear
+  # end
 
-  def self.reset_all
-    self.all.clear
-  end
-
-  def self.count
-    self.all.count
-  end
+  # def self.count
+  #   self.all.count
+  # end
 
   def artist=(artist)
     @artist = artist
   end
 
-  def to_param
-    name.downcase.gsub(' ', '-')
-  end
+  # def to_param
+  #   name.downcase.gsub(' ', '-')
+  # end
 end

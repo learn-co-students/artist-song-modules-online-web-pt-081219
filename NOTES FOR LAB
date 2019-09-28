@@ -1,0 +1,3 @@
+#It is a common practice to create a folder called concerns that holds modules that will be used across classes in an object oriented Ruby project.
+
+The Parent::Child syntax is called namespacing.
